@@ -1,0 +1,19 @@
+version: '2'
+services:
+    a2atechnology-app:
+        image: a2atechnology
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:postgresql://a2atechnology-postgresql:5432/a2atechnology
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+            - SPRING_DATA_ELASTICSEARCH_CLUSTER_NODES=a2atechnology-elasticsearch:9300
+        ports:
+            - 8080:8080
+    a2atechnology-postgresql:
+        extends:
+            file: postgresql.yml
+            service: a2atechnology-postgresql
+    a2atechnology-elasticsearch:
+        extends:
+            file: elasticsearch.yml
+            service: a2atechnology-elasticsearch
